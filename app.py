@@ -2,6 +2,14 @@
 #streamlit run app.py
 
 #pipreqs --encoding=utf8 C:\Users\angel\OneDrive\Escritorio\NOAA\web\SDRproject
+
+#git init
+#git add .
+#git commit -m "first commit"
+#git remote add origin link
+#git push origin marge
+#git push origin master
+
 import streamlit as st
 import scipy.io.wavfile as wav
 import scipy.signal as signal
@@ -44,7 +52,7 @@ imagesc_r = Image.open('sc_r.jpeg')
 
 #B&W----------------------------------------------------------------------
 imgs = []
-path = "imgs\imgsbw"
+path = "imgs/imgsbw"
 valid_images = [".jpg",".png"]
 for f in os.listdir(path):
     ext = os.path.splitext(f)[1]
@@ -53,7 +61,7 @@ for f in os.listdir(path):
     imgs.append(Image.open(os.path.join(path,f)))
 
 imgsn = []
-path = "imgs\oaa\imgsbw"
+path = "imgs/oaa/imgsbw"
 valid_images = [".jpg",".png"]
 for f in os.listdir(path):
     ext = os.path.splitext(f)[1]
@@ -65,7 +73,7 @@ l = len(imgsn)
 #Colored-------------------------------------------------------------------
 
 imgsc = []
-path = "imgs\imgsc"
+path = "imgs/imgsc"
 valid_images = [".jpg",".png"]
 for f in os.listdir(path):
     ext = os.path.splitext(f)[1]
@@ -74,7 +82,7 @@ for f in os.listdir(path):
     imgsc.append(Image.open(os.path.join(path,f)))
 
 imgsnc = []
-path = "imgs\oaa\imgsc"
+path = "imgs/oaa/imgsc"
 valid_images = [".jpg",".png"]
 for f in os.listdir(path):
     ext = os.path.splitext(f)[1]
