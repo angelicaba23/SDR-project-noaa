@@ -1,4 +1,5 @@
-#cd C:\Users\angel\OneDrive\Escritorio\NOAA\web\SDRproject
+#1
+#cd C:\Users\angel\OneDrive\Escritorio\NOAA\web\NoaaSDRproject
 #streamlit run app.py
 
 #pipreqs --encoding=utf8 C:\Users\angel\OneDrive\Escritorio\NOAA\web\SDRproject
@@ -52,6 +53,7 @@ imagesc_r = Image.open('sc_r.jpeg')
 
 #B&W----------------------------------------------------------------------
 imgs = []
+caption_all = []
 path = "imgs/imgsbw"
 valid_images = [".jpg",".png"]
 for f in os.listdir(path):
@@ -59,8 +61,12 @@ for f in os.listdir(path):
     if ext.lower() not in valid_images:
         continue
     imgs.append(Image.open(os.path.join(path,f)))
+    #caption(i) = os.path.splitext(f)[0]
+    caption_all.append(f)
+
 
 imgsn = []
+caption = []
 path = "imgs/oaa/imgsbw"
 valid_images = [".jpg",".png"]
 for f in os.listdir(path):
@@ -68,6 +74,7 @@ for f in os.listdir(path):
     if ext.lower() not in valid_images:
         continue
     imgsn.append(Image.open(os.path.join(path,f)))
+    caption.append(f)
 l = len(imgsn)
 
 #Colored-------------------------------------------------------------------
@@ -104,17 +111,16 @@ audio_bytes = audio_file.read()
 
 
 if choice == "About the challenge":
-    st.header("Hello👋🏻, here you'll find more about this amazing and challeging experice 👩🏻‍💻🛰️👨🏻‍💻")
-    st.write("The challenge is create a satellite image interception system using a homemade antenna and Software Define Radio. The first step to materialize this project was the construction of the antenna, which must receive the signal at the frequency transmitted by the satellites, then pass the analog signal to SDR for proper treatment and decode the digital signal to present a galery with diferent images of Colombia from space.")
-    
-    st.image(imagesc, caption='Desing of reception system')
+    st.header("Hello👋🏻, here you'll find more about this amazing and challenging experience 👩🏻‍💻🛰️👨🏻‍💻")
+    st.write("The challenge is to create a satellite image interception system using a homemade antenna and Software Define Radio. The first step to materialize this project was the construction of the antenna, which must receive the signal at the frequency transmitted by the satellites, then pass the analog signal to SDR for proper treatment, and decode the digital signal to present a gallery with different images of Colombia from space.")
+    st.image(imagesc, caption='Desing of reception system.')
 
     st.markdown("### 📍Objective")
     st.write("Implement a radio communication system with SDR to receive signals from the meteorological satellites for proper processing and visualization of the images in the cloud.")
     st.write("✔️ Investigate and define the concept of Software Defined Radio.")
-    st.write("✔️ Characterize the communications system: the source of information, the transmitter, channel, receiver and user.")
+    st.write("✔️ Characterize the communications system: the source of information, the transmitter, channel, receiver, and user.")
     st.write("✔️ Design and build the NOAA satellite signal receiver.")
-    st.write("✔️ Design a web page to the galety of the images obtained.")
+    st.write("✔️ Design a web page to show the obtained images .")
 
     st.markdown("### 📍Materials")
     st.write("✔️Antenna (dipole v).")
@@ -224,7 +230,7 @@ elif choice == "Decode":
 elif choice == "Galery":
     #image = Image.open('C:\Users\angel\OneDrive\Escritorio\NOAA\web\202105061448.jpg')
     menu2 = ["ALL", "NOAA 19", "NOAA 18", "NOAA 15"]
-    galery = st.sidebar.selectbox("Filer the images by satellites",menu2)
+    galery = st.selectbox("Filer the images by satellites",menu2)
     w = None 
     c = st.checkbox('Change the size of the images?')
     if c:
@@ -233,16 +239,18 @@ elif choice == "Galery":
 
     if galery == "ALL":
         st.info("**Here you can see _all_ decoded images of _NOAA satellites_ sorted by the newest.** ⤵️")
-        st.text("NOAA satellites do not transmit images with county lines or colored.")
-        st.text("By default map overlay feature is applied")
+        st.text("NOAA satellites do not transmit colored images  or  with county lines.")
+        st.text("Map overlay feature is applied by default.")
         color = st.checkbox('Add False color')
         if not color:
             for i in range(l):
-                st.image(imgs[l-i-1], width=w)
+                name = caption_all[l-i-1][0:4] + "/" + caption_all[l-i-1][4:6] + "/" + caption_all[l-i-1][6:8] + " - " + caption_all[l-i-1][8:10] + ":" + caption_all[l-i-1][4:6] + " UTC"
+                st.image(imgs[l-i-1], caption=name, width=w)
         if color: 
             #st.image(image0C, caption='NOAA 15 - 2021/05/06/ - 12:14 UTC', width=w)
             for i in range(lc):
-                st.image(imgsc[lc-i-1], width=w)
+                name = caption_all[l-i-1][0:4] + "/" + caption_all[l-i-1][4:6] + "/" + caption_all[l-i-1][6:8] + " - " + caption_all[l-i-1][8:10] + ":" + caption_all[l-i-1][4:6] + " UTC"
+                st.image(imgsc[lc-i-1],caption=name, width=w)
     elif galery == "NOAA 19":
         st.success("**Here you can see all decoded images of _NOAA 19 satellite_ sorted by the newest.** ⤵️")
         st.text("NOAA satellites do not transmit images with county lines or colored.")
@@ -250,11 +258,13 @@ elif choice == "Galery":
         color = st.checkbox('Add False color')
         if not color:
             for i in range(ln19):
-                st.image(imgsn[l-i-1], width=w)
+                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
+                st.image(imgsn[l-i-1],caption='NOAA '+ name, width=w)
         if color: 
             #st.image(image0C, caption='NOAA 15 - 2021/05/06/ - 12:14 UTC', width=w)
             for i in range(ln19):
-                st.image(imgsnc[lc-i-1], width=w)
+                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
+                st.image(imgsnc[lc-i-1], caption='NOAA '+ name, width=w)
 
     elif galery == "NOAA 18":
         st.warning("**Here you can see all decoded images of _NOAA 18 satellite_ sorted by the newest.** ⤵️")
@@ -263,11 +273,13 @@ elif choice == "Galery":
         color = st.checkbox('Add False color')
         if not color:
             for i in range(ln19,ln18):
-                st.image(imgsn[l-i-1], width=w)
+                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
+                st.image(imgsn[l-i-1],caption='NOAA '+name, width=w)
         if color: 
             #st.image(image0C, caption='NOAA 15 - 2021/05/06/ - 12:14 UTC', width=w)
             for i in range(ln19,ln18):
-                st.image(imgsnc[lc-i-1], width=w)
+                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
+                st.image(imgsnc[lc-i-1],caption='NOAA '+name, width=w)
 
     elif galery == "NOAA 15":
         st.error("**Here you can see all decoded images of _NOAA 15 satellite_ sorted by the newest.** ⤵️")
@@ -276,11 +288,13 @@ elif choice == "Galery":
         color = st.checkbox('Add False color')
         if not color:
             for i in range(ln18,ln15+1):
-                st.image(imgsn[i-i-1], width=w)
+                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
+                st.image(imgsn[l-i-1],caption='NOAA ' +name, width=w)
         if color: 
             #st.image(image0C, caption='NOAA 15 - 2021/05/06/ - 12:14 UTC', width=w)
             for i in range(ln18,ln15+1):
-                st.image(imgsnc[lc-i-1], width=w)
+                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
+                st.image(imgsnc[lc-i-1], caption='NOAA '+name, width=w)
     
     
     #im.show() 
