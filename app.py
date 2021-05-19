@@ -7,7 +7,7 @@
 #git init
 #git add .
 #git commit -m "first commit"
-#git remote add origin link
+#git remote add origin https://github.com/angelicaba23/SDR-project-noaa.git
 #git push origin marge
 #git push origin master
 
