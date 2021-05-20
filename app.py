@@ -1,15 +1,4 @@
-#1
-#cd C:\Users\angel\OneDrive\Escritorio\NOAA\web\NoaaSDRproject
-#streamlit run app.py
-
-#pipreqs --encoding=utf8 C:\Users\angel\OneDrive\Escritorio\NOAA\web\SDRproject
-
-#git init
-#git add .
-#git commit -m "first commit"
-#git remote add origin https://github.com/angelicaba23/SDR-project-noaa.git
-#git push origin marge
-#git push origin master
+#Hi
 
 import streamlit as st
 import scipy.io.wavfile as wav
@@ -27,7 +16,6 @@ encoding="utf8"
 st.title("Reciving & Decoding APT 🛰️💻🌎🌦️")
 #st.text("Coded by: Angélica Barranco")
 
-#
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1)
 w = 12
 h = 16
@@ -63,23 +51,12 @@ for f in os.listdir(path):
     imgs.append(Image.open(os.path.join(path,f)))
     #caption(i) = os.path.splitext(f)[0]
     caption_all.append(f)
-
-
-imgsn = []
-caption = []
-path = "imgs/oaa/imgsbw"
-valid_images = [".jpg",".png"]
-for f in os.listdir(path):
-    ext = os.path.splitext(f)[1]
-    if ext.lower() not in valid_images:
-        continue
-    imgsn.append(Image.open(os.path.join(path,f)))
-    caption.append(f)
-l = len(imgsn)
+l = len(imgs)
 
 #Colored-------------------------------------------------------------------
 
 imgsc = []
+caption_allc = []
 path = "imgs/imgsc"
 valid_images = [".jpg",".png"]
 for f in os.listdir(path):
@@ -87,22 +64,8 @@ for f in os.listdir(path):
     if ext.lower() not in valid_images:
         continue
     imgsc.append(Image.open(os.path.join(path,f)))
-
-imgsnc = []
-path = "imgs/oaa/imgsc"
-valid_images = [".jpg",".png"]
-for f in os.listdir(path):
-    ext = os.path.splitext(f)[1]
-    if ext.lower() not in valid_images:
-        continue
-    imgsnc.append(Image.open(os.path.join(path,f)))
-lc = len(imgsnc)
-
-ln19 = 11
-ln18 = ln19+10
-ln15 = ln18+18
-
-
+    caption_allc.append(f)
+lc = len(imgsc)
 
 #audio--------------------------------------------------------------------
 
@@ -244,27 +207,31 @@ elif choice == "Galery":
         color = st.checkbox('Add False color')
         if not color:
             for i in range(l):
-                name = caption_all[l-i-1][0:4] + "/" + caption_all[l-i-1][4:6] + "/" + caption_all[l-i-1][6:8] + " - " + caption_all[l-i-1][8:10] + ":" + caption_all[l-i-1][4:6] + " UTC"
-                st.image(imgs[l-i-1], caption=name, width=w)
+                n = l-i-1
+                name = "NOAA " + caption_all[n][14:16] + " - " + caption_all[n][0:4] + "/" + caption_all[n][4:6] + "/" + caption_all[n][6:8] + " - " + caption_all[n][8:10] + ":" + caption_all[n][10:12] + " UTC"
+                st.image(imgs[n], caption=name, width=w)
         if color: 
-            #st.image(image0C, caption='NOAA 15 - 2021/05/06/ - 12:14 UTC', width=w)
             for i in range(lc):
-                name = caption_all[l-i-1][0:4] + "/" + caption_all[l-i-1][4:6] + "/" + caption_all[l-i-1][6:8] + " - " + caption_all[l-i-1][8:10] + ":" + caption_all[l-i-1][4:6] + " UTC"
-                st.image(imgsc[lc-i-1],caption=name, width=w)
+                n = lc-i-1
+                name = "NOAA " + caption_allc[n][14:16] + " - " + caption_allc[n][0:4] + "/" + caption_allc[n][4:6] + "/" + caption_allc[n][6:8] + " - " + caption_allc[n][8:10] + ":" + caption_allc[n][10:12] + " UTC"
+                st.image(imgsc[n],caption=name, width=w)
     elif galery == "NOAA 19":
         st.success("**Here you can see all decoded images of _NOAA 19 satellite_ sorted by the newest.** ⤵️")
         st.text("NOAA satellites do not transmit images with county lines or colored.")
         st.text("By default map overlay feature is applied")
         color = st.checkbox('Add False color')
         if not color:
-            for i in range(ln19):
-                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
-                st.image(imgsn[l-i-1],caption='NOAA '+ name, width=w)
+            for i in range(l):
+                n = l-i-1
+                if caption_all[n][15] == "9":
+                    name = "NOAA " + caption_all[n][14:16] + " - " + caption_all[n][0:4] + "/" + caption_all[n][4:6] + "/" + caption_all[n][6:8] + " - " + caption_all[n][8:10] + ":" + caption_all[n][10:12] + " UTC"
+                    st.image(imgs[n], caption=name, width=w)
         if color: 
-            #st.image(image0C, caption='NOAA 15 - 2021/05/06/ - 12:14 UTC', width=w)
-            for i in range(ln19):
-                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
-                st.image(imgsnc[lc-i-1], caption='NOAA '+ name, width=w)
+            for i in range(lc):
+                n = lc-i-1
+                if caption_allc[n][15] == "9":
+                    name = "NOAA " + caption_allc[n][14:16] + " - " + caption_allc[n][0:4] + "/" + caption_allc[n][4:6] + "/" + caption_allc[n][6:8] + " - " + caption_allc[n][8:10] + ":" + caption_allc[n][10:12] + " UTC"
+                    st.image(imgsc[n],caption=name, width=w)
 
     elif galery == "NOAA 18":
         st.warning("**Here you can see all decoded images of _NOAA 18 satellite_ sorted by the newest.** ⤵️")
@@ -272,14 +239,17 @@ elif choice == "Galery":
         st.text("By default map overlay feature is applied")
         color = st.checkbox('Add False color')
         if not color:
-            for i in range(ln19,ln18):
-                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
-                st.image(imgsn[l-i-1],caption='NOAA '+name, width=w)
+            for i in range(l):
+                n = l-i-1
+                if caption_all[n][15] == "8":
+                    name = "NOAA " + caption_all[n][14:16] + " - " + caption_all[n][0:4] + "/" + caption_all[n][4:6] + "/" + caption_all[n][6:8] + " - " + caption_all[n][8:10] + ":" + caption_all[n][10:12] + " UTC"
+                    st.image(imgs[n], caption=name, width=w)
         if color: 
-            #st.image(image0C, caption='NOAA 15 - 2021/05/06/ - 12:14 UTC', width=w)
-            for i in range(ln19,ln18):
-                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
-                st.image(imgsnc[lc-i-1],caption='NOAA '+name, width=w)
+            for i in range(lc):
+                n = lc-i-1
+                if caption_allc[n][15] == "8":
+                    name = "NOAA " + caption_allc[n][14:16] + " - " + caption_allc[n][0:4] + "/" + caption_allc[n][4:6] + "/" + caption_allc[n][6:8] + " - " + caption_allc[n][8:10] + ":" + caption_allc[n][10:12] + " UTC"
+                    st.image(imgsc[n],caption=name, width=w)
 
     elif galery == "NOAA 15":
         st.error("**Here you can see all decoded images of _NOAA 15 satellite_ sorted by the newest.** ⤵️")
@@ -287,14 +257,17 @@ elif choice == "Galery":
         st.text("By default map overlay feature is applied")
         color = st.checkbox('Add False color')
         if not color:
-            for i in range(ln18,ln15+1):
-                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
-                st.image(imgsn[l-i-1],caption='NOAA ' +name, width=w)
+            for i in range(l):
+                n = l-i-1
+                if caption_all[n][15] == "5":
+                    name = "NOAA " + caption_all[n][14:16] + " - " + caption_all[n][0:4] + "/" + caption_all[n][4:6] + "/" + caption_all[n][6:8] + " - " + caption_all[n][8:10] + ":" + caption_all[n][10:12] + " UTC"
+                    st.image(imgs[n], caption=name, width=w)
         if color: 
-            #st.image(image0C, caption='NOAA 15 - 2021/05/06/ - 12:14 UTC', width=w)
-            for i in range(ln18,ln15+1):
-                name = caption[l-i-1][1:3] +" - " +caption[l-i-1][4:8] + "/" + caption[l-i-1][8:10] + "/" + caption[l-i-1][10:12] + " - " + caption[l-i-1][12:14] + ":" + caption[l-i-1][4:6] + " UTC"
-                st.image(imgsnc[lc-i-1], caption='NOAA '+name, width=w)
+            for i in range(lc):
+                n = lc-i-1
+                if caption_allc[n][15] == "5":
+                    name = "NOAA " + caption_allc[n][14:16] + " - " + caption_allc[n][0:4] + "/" + caption_allc[n][4:6] + "/" + caption_allc[n][6:8] + " - " + caption_allc[n][8:10] + ":" + caption_allc[n][10:12] + " UTC"
+                    st.image(imgsc[n],caption=name, width=w)
     
     
     #im.show() 
