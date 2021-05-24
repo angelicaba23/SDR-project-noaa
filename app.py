@@ -1,5 +1,18 @@
 #Hi
 
+#cd C:\Users\angel\OneDrive\Escritorio\NOAA\web\NoaaSDRproject
+#streamlit run app.py
+
+#pipreqs --encoding=utf8 C:\Users\angel\OneDrive\Escritorio\NOAA\web\SDRproject
+
+#git init
+#git add .
+#git commit -m "first commit"
+#git remote add origin https://github.com/angelicaba23/SDR-project-noaa.git
+#git push origin master
+
+#git push --force origin master 
+
 import streamlit as st
 import scipy.io.wavfile as wav
 import scipy.signal as signal
@@ -31,7 +44,7 @@ plt.minorticks_on()
 st.empty()
 
 menu = ["About the challenge", "Decode", "Galery"]
-choice = st.sidebar.selectbox("Menu",menu)
+choice = st.selectbox("Menu",menu)
 
 
 
