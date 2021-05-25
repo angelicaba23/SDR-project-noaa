@@ -64,7 +64,7 @@ lc = len(imgsc)
 
 #audio--------------------------------------------------------------------
 
-audio_file = open('202105061448.wav', 'rb')
+audio_file = open('202105131227.wav', 'rb')
 audio_bytes = audio_file.read()
 
 
