@@ -30,11 +30,6 @@ plt.minorticks_on()
 
 st.empty()
 
-menu = ["About the challenge", "Decode", "Galery"]
-choice = st.sidebar.selectbox("Menu",menu)
-
-
-
 #photo--------------------------------------------------------------------
 imagesc = Image.open('nst.png')
 imagesc_r = Image.open('sc_r.jpeg')
@@ -72,6 +67,16 @@ lc = len(imgsc)
 audio_file = open('202105061448.wav', 'rb')
 audio_bytes = audio_file.read()
 
+
+menu = ["Home","About the challenge", "Decode", "Galery"]
+choice = st.selectbox("Menu",menu)
+if choice == "Home":
+    #st.markdown("![Alt Text](https://i.gifer.com/F4kC.gif)")
+    #st.markdown("![Alt Text](https://i.gifer.com/4gh7.gif)")
+    #st.markdown("![Alt Text](https://i.gifer.com/P1dz.gif)")
+    st.markdown("![Alt Text](https://i.gifer.com/QXma.gif)")
+    #st.markdown("![Alt Text](https://media.giphy.com/media/xjc98z5UU4YE0Tvbjn/giphy.gif)")
+    #st.markdown("![Alt Text](https://img.culturacolectiva.com/content/2016/05/ideas-cientificas-gif-tierra-redonda-medium.gif)")
 
 if choice == "About the challenge":
     st.header("Hello👋🏻, here you'll find more about this amazing and challenging experience 👩🏻‍💻🛰️👨🏻‍💻")
