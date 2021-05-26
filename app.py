@@ -187,7 +187,7 @@ elif choice == "Decode":
 
     uploaded_file  = st.file_uploader("Insert the .wav file you want to decode", type="wav",accept_multiple_files=False)
     ud = "**default**"
-    wav_file = '202105141212.wav'
+    wav_file = '202105131227.wav'
     if uploaded_file is not None:
         ud = "**uploaded**" 
         #wav_file = AudioSegment.from_ogg(uploaded_file) 
