@@ -71,6 +71,9 @@ audio_bytes = audio_file.read()
 menu = ["Home","About the challenge", "Decode", "Galery"]
 choice = st.selectbox("Menu",menu)
 if choice == "Home":
+    st.write("")
+    st.write("")
+    st.write("")
     #st.markdown("![Alt Text](https://i.gifer.com/F4kC.gif)")
     #st.markdown("![Alt Text](https://i.gifer.com/4gh7.gif)")
     #st.markdown("![Alt Text](https://i.gifer.com/P1dz.gif)")
