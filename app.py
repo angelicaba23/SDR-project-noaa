@@ -122,7 +122,8 @@ elif choice == "Decode":
         ax1.set_xlabel("Samples")
         ax1.set_ylabel("Amplitude")
         ax1.set_title("Signal")
-
+        st.write("")
+        st.write("")
         #Step 2.
         # To speed up decoding, let’s reduce the sampling rate by 4 times,
         # discarding unnecessary values: 
@@ -154,7 +155,8 @@ elif choice == "Decode":
         ax2.set_xlabel("Samples")
         ax2.set_ylabel("Amplitude")
         ax2.set_title("AM Signal")
-
+        st.write("")
+        st.write("")
 
         #Step 4. The final step. Actually, the decoding was already finished.
         # The data itself is transmitted in analogue format, so the color of
