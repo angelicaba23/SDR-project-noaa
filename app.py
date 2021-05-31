@@ -122,8 +122,6 @@ elif choice == "Decode":
         ax1.set_xlabel("Samples")
         ax1.set_ylabel("Amplitude")
         ax1.set_title("Signal")
-        st.write("")
-        st.write("")
         #Step 2.
         # To speed up decoding, let’s reduce the sampling rate by 4 times,
         # discarding unnecessary values: 
