@@ -9,6 +9,7 @@ from PIL import Image
 from pydub import AudioSegment
 import os
 import os, os.path
+from PIL import Image
 
 
 encoding="utf8"
