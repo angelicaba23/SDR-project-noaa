@@ -69,7 +69,7 @@ audio_bytes = audio_file.read()
 
 
 menu = ["Home","About the challenge", "Decode", "Galery"]
-choice = st.selectbox("Menu",menu)
+choice = st.selectbox("Menu",menu, index=3)
 if choice == "Home":
     st.write("")
     st.write("")
