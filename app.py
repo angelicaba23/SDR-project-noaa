@@ -9,7 +9,6 @@ from PIL import Image
 from pydub import AudioSegment
 import os
 import os, os.path
-from PIL import Image
 
 
 encoding="utf8"
@@ -81,7 +80,6 @@ if choice == "Home":
     #st.markdown("![Alt Text](https://i.gifer.com/QXma.gif)")
     #st.markdown("![Alt Text](https://media.giphy.com/media/xjc98z5UU4YE0Tvbjn/giphy.gif)")
     st.markdown("![Img of Space](https://img.culturacolectiva.com/content/2016/05/ideas-cientificas-gif-tierra-redonda-medium.gif)")
-    st.image(“https://img.culturacolectiva.com/content/2016/05/ideas-cientificas-gif-tierra-redonda-medium.gif”, width=1000, height=1500)
 
 if choice == "About the challenge":
     st.header("Hello👋🏻, here you'll find more about this amazing and challenging experience 👩🏻‍💻🛰️👨🏻‍💻")
